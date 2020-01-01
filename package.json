@@ -1,0 +1,13 @@
+{
+  "name": "typescript-bazel",
+  "version": "0.0.1",
+  "description": "",
+  "devDependencies": {
+    "@bazel/bazel": "latest",
+    "@bazel/ibazel": "latest",
+    "@bazel/buildifier": "latest",
+    "@bazel/typescript": "latest",
+    "@types/node": "12.12.21",
+    "typescript": "3.7.4"
+  }
+}

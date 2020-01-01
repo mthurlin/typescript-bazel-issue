@@ -1,0 +1,27 @@
+load("@npm_bazel_typescript//:index.bzl", "ts_library")
+load("@build_bazel_rules_nodejs//:index.bzl", "npm_package_bin", "nodejs_binary")
+
+ts_library(
+    name = "mycompiler",
+    srcs = ["mycompiler.ts", "utils.ts"],
+    deps = ["@npm//@types/node"],
+)
+
+nodejs_binary(
+    name = "compile",
+    data = [":mycompiler"],
+    entry_point = "mycompiler.ts",
+)
+
+filegroup(
+    name = "data_to_compile",
+    srcs = ["data.txt"]
+)
+
+npm_package_bin(
+    name = "output",
+    tool = ":compile",
+    data = [":data_to_compile"],
+    args = ["$(location data_to_compile) $@"],
+    outs = ["output.txt"]
+)
